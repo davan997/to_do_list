@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget{
 }
 
 class _MyApp extends State<MyApp> with TickerProviderStateMixin{
+
   int current_index = 0;
   final screen = [
     Complete(),

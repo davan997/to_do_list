@@ -12,11 +12,16 @@ class AQusetion extends StatefulWidget{
   }
 }
 
-class _AQusetion extends State<AQusetion>{
+MyStream callback(){
   MyStream myStream = MyStream();
+  return myStream;
+}
+
+class _AQusetion extends State<AQusetion>{
+
   @override
   void dispose() {
-    myStream.dispose();
+    callback().dispose();
     super.dispose();
   }
 
@@ -38,8 +43,21 @@ class _AQusetion extends State<AQusetion>{
         body:SingleChildScrollView(
           child: Column(
             children: [
-              const testAlertDialog(),
-              StreamBuilder(stream: myStream.getStream, builder: (context, snapshot) =>
+              Center(
+                child : TextButton(
+                  child: const Text('Create Task',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => testAlertDialog()
+                  ),
+                ),
+              ),
+              StreamBuilder(stream: callback().getStream, builder: (context, snapshot) =>
                 Column(
                   children: [
                     Container(

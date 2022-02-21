@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-
-import 'package:to_do_list/stream.dart';
+import 'package:to_do_list/page/activity_question.dart';
 
 class InComplete extends StatefulWidget{
   @override
@@ -12,9 +9,6 @@ class InComplete extends StatefulWidget{
 }
 
 class _InComplete extends State<InComplete>{
-
-  MyStream _myStream = MyStream();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +24,7 @@ class _InComplete extends State<InComplete>{
           ),
         ),
         body: StreamBuilder(
-          stream: _myStream.getStream,
+          stream: callback().getStream,
           builder: (context, snapshot) {
             return Container(padding: const EdgeInsets.fromLTRB(15, 298, 10, 0),
                 child: Text(snapshot.hasData ? snapshot.data.toString() : "No data, please create the task new",

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/data/data.dart';
-import 'package:to_do_list/stream.dart';
+import 'package:to_do_list/page/activity_question.dart';
 
 class Complete extends StatefulWidget{
   @override
@@ -10,9 +9,6 @@ class Complete extends StatefulWidget{
 }
 
 class _Complete extends State<Complete>{
-
-  MyStream _myStream = MyStream();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,7 +25,7 @@ class _Complete extends State<Complete>{
           ),
         ),
         body: StreamBuilder(
-          stream: _myStream.getStream,
+          stream: callback().getStream,
           builder: (context, snapshot) {
             return Container(padding: const EdgeInsets.fromLTRB(15, 298, 10, 0),
                 child: Text(snapshot.hasData ? snapshot.data.toString() : "No data, please create the task new",
