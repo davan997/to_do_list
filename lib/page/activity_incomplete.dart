@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/page/activity_question.dart';
+import 'package:to_do_list/data/liststream.dart';
 
 class InComplete extends StatefulWidget{
   @override
@@ -23,16 +23,7 @@ class _InComplete extends State<InComplete>{
               textDirection: TextDirection.ltr,),
           ),
         ),
-        body: StreamBuilder(
-          stream: callback().getStream,
-          builder: (context, snapshot) {
-            return Container(padding: const EdgeInsets.fromLTRB(15, 298, 10, 0),
-                child: Text(snapshot.hasData ? snapshot.data.toString() : "No data, please create the task new",
-                    style: const TextStyle(fontSize: 27, fontWeight: FontWeight.bold)
-              )
-            );
-          },
-        )
+        body: ListStream()
       ),
     );
   }

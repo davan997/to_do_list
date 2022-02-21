@@ -1,8 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:to_do_list/dialog.dart';
-import 'package:to_do_list/stream.dart';
+import 'package:to_do_list/data/liststream.dart';
 
 class AQusetion extends StatefulWidget{
   const AQusetion({Key? key}) : super(key: key);
@@ -12,19 +10,7 @@ class AQusetion extends StatefulWidget{
   }
 }
 
-MyStream callback(){
-  MyStream myStream = MyStream();
-  return myStream;
-}
-
 class _AQusetion extends State<AQusetion>{
-
-  @override
-  void dispose() {
-    callback().dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,21 +39,11 @@ class _AQusetion extends State<AQusetion>{
                   ),
                   onPressed: () => showDialog(
                     context: context,
-                    builder: (context) => testAlertDialog()
+                    builder: (context) => const testAlertDialog()
                   ),
                 ),
               ),
-              StreamBuilder(stream: callback().getStream, builder: (context, snapshot) =>
-                Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(15, 250, 10, 0),
-                        child: Text(snapshot.hasData ? snapshot.data.toString() : "No data, please create the task new",
-                          style: const TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
-                        )
-                    ),
-                  ],
-                ))
+              ListStream()
             ],
           ),
         ),

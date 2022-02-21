@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/stream.dart';
+import 'package:to_do_list/data/liststream.dart';
 
 class testAlertDialog extends StatefulWidget{
   const testAlertDialog({Key? key}) : super(key: key);
-
   @override
   State<StatefulWidget> createState() {
     return _testAlertDialog();
@@ -12,8 +11,7 @@ class testAlertDialog extends StatefulWidget{
 
 class _testAlertDialog extends State<testAlertDialog>{
 
-  MyStream myStream = MyStream();
-  String addQ = '';
+  late String addQ;
   final edittextdialog = TextEditingController();
   bool isChecked = false;
 
@@ -48,7 +46,7 @@ class _testAlertDialog extends State<testAlertDialog>{
                       Expanded( flex: 2,
                           child: Checkbox(
                             value: isChecked,
-                            onChanged: (bool? d)=> setState(() => isChecked = d!),
+                            onChanged: (d)=> setState(() => isChecked = d!),
                           )
                       )
                     ],
@@ -61,12 +59,11 @@ class _testAlertDialog extends State<testAlertDialog>{
                   child: const Text('SUBMIT', style: TextStyle(fontSize: 15),),
                   onPressed: ()=> setState(() {
                     if(edittextdialog.text.isNotEmpty){
-                      myStream.increment(addQ, isChecked);
+                      callback().increment(addQ, isChecked);
                       edittextdialog.text = '';
                       Navigator.of(context).pop();
                     } else {
-                      String text = "Please fill task above";
-                      SnackBar snackbar = SnackBar(content: Text(text));
+                      SnackBar snackbar = const SnackBar(content: Text("Please fill task above"));
                       ScaffoldMessenger.of(context).showSnackBar(snackbar);
                     }
                   }),
