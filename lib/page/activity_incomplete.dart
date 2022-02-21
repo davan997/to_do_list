@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:to_do_list/data/data.dart';
+
+import 'package:to_do_list/stream.dart';
 
 class InComplete extends StatefulWidget{
   @override
@@ -10,25 +13,32 @@ class InComplete extends StatefulWidget{
 
 class _InComplete extends State<InComplete>{
 
+  MyStream _myStream = MyStream();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("InComplete",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-            textDirection: TextDirection.ltr,),
+          title: const Center(
+            child: Text("InComplete Task",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+              textDirection: TextDirection.ltr,),
+          ),
         ),
-        body: ListView(
-          children: nhungcauhoi.map((e) => Row(
-                children: [
-                  Text(e.title),
-                  Checkbox(value: e.isCheck == true, onChanged: (d) => setState(() {
-                  }))
-                ]
+        body: StreamBuilder(
+          stream: _myStream.getStream,
+          builder: (context, snapshot) {
+            return Container(padding: const EdgeInsets.fromLTRB(15, 298, 10, 0),
+                child: Text(snapshot.hasData ? snapshot.data.toString() : "No data, please create the task new",
+                    style: const TextStyle(fontSize: 27, fontWeight: FontWeight.bold)
               )
-          ).toList()
-        ),
+            );
+          },
+        )
       ),
     );
   }
