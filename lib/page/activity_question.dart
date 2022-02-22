@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:to_do_list/dialog.dart';
 import 'package:to_do_list/data/liststream.dart';
@@ -37,10 +39,12 @@ class _AQusetion extends State<AQusetion>{
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => const testAlertDialog()
-                  ),
+                  onPressed: () => setState(() {
+                    showDialog(
+                        context: context,
+                        builder: (context) => const testAlertDialog()
+                    );
+                  }),
                 ),
               ),
               ListStream()

@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:to_do_list/model/question.dart';
+import 'package:to_do_list/data/data.dart';
 
 class MyStream {
-  List<Question> lquestion = [];
-  StreamController streamController = StreamController<List<Question>>.broadcast();
-  Stream get getStream => streamController.stream;
+  static StreamController<List<Question>> streamController = StreamController<List<Question>>.broadcast();
+  static Stream<List<Question>> get showStream => streamController.stream;
 
-  void increment(String s, bool b){
-    lquestion.add(Question(title: s, isCheck: b));
-    streamController.sink.add(lquestion);
+  static void increment(String s, bool b){
+    lq.add(Question(title: s,isCheck: b));
+    streamController.sink.add(lq);
   }
 
   void dispose(){

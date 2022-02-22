@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/data/liststream.dart';
 
-class InComplete extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() {
-    return _InComplete();
-  }
-}
+class InComplete extends StatelessWidget{
+  const InComplete({Key? key}) : super(key: key);
 
-class _InComplete extends State<InComplete>{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

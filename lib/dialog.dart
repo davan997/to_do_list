@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/data/liststream.dart';
+import 'package:to_do_list/stream.dart';
 
 class testAlertDialog extends StatefulWidget{
   const testAlertDialog({Key? key}) : super(key: key);
@@ -38,9 +38,7 @@ class _testAlertDialog extends State<testAlertDialog>{
                                 decoration: const InputDecoration(hintText: 'Write task here ...',),
                                 style: const TextStyle(fontSize: 20),
                                 controller: edittextdialog,
-                                onChanged: (d) => setState(() {
-                                  addQ = d;
-                                })),
+                                onChanged: (d) => setState(() => addQ = d)),
                           )
                       ),
                       Expanded( flex: 2,
@@ -59,7 +57,7 @@ class _testAlertDialog extends State<testAlertDialog>{
                   child: const Text('SUBMIT', style: TextStyle(fontSize: 15),),
                   onPressed: ()=> setState(() {
                     if(edittextdialog.text.isNotEmpty){
-                      callback().increment(addQ, isChecked);
+                      MyStream.increment(addQ, isChecked);
                       edittextdialog.text = '';
                       Navigator.of(context).pop();
                     } else {
