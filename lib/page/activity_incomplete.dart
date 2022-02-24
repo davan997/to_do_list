@@ -9,6 +9,7 @@ class InComplete extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Center(
             child: Text("InComplete Task",

@@ -16,7 +16,8 @@ class _AQusetion extends State<AQusetion>{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
           elevation: 5,
           title: const Center(
             child: Text("All Task",
@@ -27,62 +28,64 @@ class _AQusetion extends State<AQusetion>{
               textDirection: TextDirection.ltr,),
           ),
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-            Expanded(flex: 1,
-                child: Center(
-                  child : TextButton(
-                    child: const Text('Create Task',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () => setState(() {
-                      showDialog(
-                          context: context,
-                          builder: (context) => const testAlertDialog()
-                      );
-                    }),
-                  ),
-                )),
-            Expanded(flex: 11,
-              child: StreamBuilder<List<Question>>(
-                stream: MyStream.showStream,
-                builder: (context, snapshot){
-                  if(snapshot.hasData){
-                    return ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index){
-                          return Row(
-                            children: [
-                              Expanded(flex: 12,
-                                  child: Container(
-                                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 15),
-                                    child: Text(snapshot.data![index].title,
-                                      style: const TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.bold),),
-                                  )),
-                              Expanded(flex: 2,
-                                child: Checkbox(value: snapshot.data![index].isCheck, onChanged: (d){
-                                  setState(() {
-                                    snapshot.data![index].isCheck = d!;
-                                    MyStream.setUpgrade();
-                                  });
-                                }),)
-                            ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(flex: 1,
+                    child: Center(
+                      child : TextButton(
+                        child: const Text('Create Task',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () => setState(() {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const testAlertDialog()
                           );
-                        }
-                    );
-                  }
-                  return Container();
-                },
-              ),
-            )
-          ],
-        ),)
+                        }),
+                      ),
+                    )),
+                Expanded(flex: 11,
+                  child: StreamBuilder<List<Question>>(
+                    stream: MyStream.showStream,
+                    builder: (context, snapshot){
+                      if(snapshot.hasData){
+                        return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index){
+                              return Row(
+                                children: [
+                                  Expanded(flex: 12,
+                                      child: Container(
+                                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 15),
+                                        child: Text(snapshot.data![index].title,
+                                          style: const TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.bold),),
+                                      )),
+                                  Expanded(flex: 2,
+                                    child: Checkbox(value: snapshot.data![index].isCheck, onChanged: (d){
+                                      setState(() {
+                                        snapshot.data![index].isCheck = d!;
+                                        MyStream.setUpgrade();
+                                      });
+                                    }),
+                                  )
+                                ],
+                              );
+                            }
+                            );
+                      }
+                      return Container();
+                      },
+                  ),
+                )
+              ],
+            ),
+          )
       ),
     );
   }

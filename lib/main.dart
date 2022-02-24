@@ -20,9 +20,9 @@ class _MyApp extends State<MyApp>{
 
   int current_index = 0;
   final screen = [
-    Complete(),
-    AQusetion(),
-    InComplete()
+    const Complete(),
+    const AQusetion(),
+    const InComplete()
   ];
 
   @override
@@ -35,6 +35,7 @@ class _MyApp extends State<MyApp>{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: IndexedStack(
           children: screen,
           index: current_index,
