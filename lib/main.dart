@@ -35,16 +35,19 @@ class _MyApp extends State<MyApp>{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: screen[current_index],
+        body: IndexedStack(
+          children: screen,
+          index: current_index,
+        ),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: current_index,
             onTap: (d) => setState(() {
               current_index = d;
             }),
             items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.house), label: 'Complete'),
-              BottomNavigationBarItem(icon: Icon(Icons.all_inbox), label: 'All'),
-              BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: 'InComplete')
+              BottomNavigationBarItem(icon: Icon(Icons.check), label: 'Complete' ),
+              BottomNavigationBarItem(icon: Icon(Icons.list), label: 'All'),
+              BottomNavigationBarItem(icon: Icon(Icons.close), label: 'InComplete')
             ]),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/data/liststream.dart';
+import 'package:to_do_list/model/question.dart';
+import 'package:to_do_list/stream/teststream.dart';
 
 class InComplete extends StatelessWidget{
   const InComplete({Key? key}) : super(key: key);
@@ -18,8 +19,38 @@ class InComplete extends StatelessWidget{
               textDirection: TextDirection.ltr,),
           ),
         ),
-        body: ListStream()
-      ),
-    );
+        body:StreamBuilder<List<Question>>(
+          stream: MyStream.showStream,
+          builder: (context, snapshot){
+            if(snapshot.hasData){
+              return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index){
+                    if(snapshot.data![index].isCheck == false){
+                      return Row(
+                        children: [
+                          Expanded(flex: 12,
+                              child: Container(
+                                padding: const EdgeInsets.fromLTRB(20, 20, 0, 15),
+                                child: Text(snapshot.data![index].title,
+                                  style: const TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.bold),),
+                              )),
+                          Expanded(flex: 2,
+                            child: Checkbox(value: snapshot.data![index].isCheck, onChanged: (d){})
+                          )
+                        ],
+                      );
+                    }
+                    return Container();
+                  }
+              );
+            }
+            return Container();
+          },
+        ),
+        ),
+      );
   }
 }
